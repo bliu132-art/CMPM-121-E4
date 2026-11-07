@@ -136,10 +136,15 @@ output {
 
 .pip {
   color: var(--pink);
+  width: 22px;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  background: currentColor;
 }
 
 .cell {
   color: var(--gold);
+  flex: 1;
+  border-radius: 2px;
 }
 
 .pip.lit,
@@ -392,4 +397,11 @@ output {
   .panel-left {
     order: -1;
   }
+}
+
+.stop-dot {
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
 }
