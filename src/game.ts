@@ -1,10 +1,4 @@
-import {
-  BOSS_NAME,
-  ENEMY_STATS,
-  type EnemyKind,
-  type Formation,
-  SECTORS,
-} from "./route.ts";
+import { BOSS_NAME, type EnemyKind, type Formation, SECTORS } from "./route.ts";
 import Phaser from "phaser";
 import {
   type Actor,
@@ -326,17 +320,8 @@ export class GameScene extends Phaser.Scene implements Arena {
     this.enemies.push(
       new ShmupPrefabSprite(
         this,
-        x,
-        y,
         "drone",
-        2,
-        100,
-        13,
-        0.015,
-        true,
-        false,
-        x,
-        x < WIDTH / 2 ? 1 : -1,
+        { x, y, side: x < WIDTH / 2 ? 1 : -1 },
       ),
     );
   }
@@ -433,7 +418,6 @@ export class GameScene extends Phaser.Scene implements Arena {
     shape: Formation,
     centerX: number,
   ): void {
-    const stats = ENEMY_STATS[kind];
     const mid = (count - 1) / 2;
 
     for (let i = 0; i < count; i++) {
@@ -458,20 +442,7 @@ export class GameScene extends Phaser.Scene implements Arena {
 
       if (t !== due) continue;
 
-      const enemy = new ShmupPrefabSprite(
-        this,
-        x,
-        y,
-        kind,
-        stats.hp,
-        stats.score,
-        stats.radius,
-        stats.dropChance,
-        stats.canShoot,
-        false,
-        x,
-        side,
-      );
+      const enemy = new ShmupPrefabSprite(this, kind, { x, y, side });
       this.enemies.push(enemy);
     }
   }
